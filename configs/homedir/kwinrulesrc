@@ -1,0 +1,17 @@
+[$Version]
+update_info=kwinrules.upd:replace-placement-string-to-enum
+
+[1]
+Description=Window settings for scrcpy
+position=1190,342
+positionrule=3
+size=410,880
+sizerule=3
+title=SM-G970U
+titlematch=1
+types=1
+wmclass=scrcpy
+wmclassmatch=1
+
+[General]
+count=1
