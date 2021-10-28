@@ -1,14 +1,28 @@
 #!/bin/bash
 # This is my config script I'm hoping will work
-# Ver 1.1
+# Ver 1.2
 
 #/----------- Installs -----------/#
 
-sudo pacman -S notepadqq yay konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger font-manager fzf neofetch rofi timeshift tldr wget rclone catfish
+sudo pacman -S notepadqq yay konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger font-manager fzf neofetch rofi timeshift tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint appimagelauncher neovim
 sudo pacman -S base-devel
-yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr
+yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu
 yay -S clonehero nsnake # vitetris //tetris is broken rn
 sudo sh ./installs/JD2Setup_x64.sh
+pip install howdoi yt-dlp
+
+#/----------- Git Clones -----------/#
+mkdir gitcl && cd ./gitcl
+echo "Please Sign into Git"
+git auth login
+git clone https://github.com/vicgeralds/vitetris.git						# Tetris
+		cd ./vitetris
+		sudo make install
+		cd ..
+git clone
+
+# I hate how fuckin long that URL is
+wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODA1ODg4MzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjY4MGM3MTE4ZTcwMGMyNDA5ZTM1Yjk4ZGYyMmUxOTc1ZGE1NDRkNTU2ZDNmNWU2ZDJlMDU3Y2MxYjljMDEzNjZjZTgzM2VlOTY3NGU0NjkwMmUwYzI2NGI3ZDBhZjM3MjVmODJjMmYyMDAwZTA3ZWI4NGJiMWQwMTJjNzRjZTQzIiwidCI6MTYzNTQwNjM5OSwic3RmcCI6ImFkNzIyNGFjNzVjM2I0M2E3NjhkM2RlNWY0M2RlZTdjIiwic3RpcCI6IjE0Ny4xNzQuNzUuMTI4In0.blNhzTG-bnW5EmBXsTJmb2UApDLLoa2jvNrllt83AP4/sugar-candy.tar.gz
 #/----------- cp Themes  -----------/#
 
     # Win 8.1 mouse
@@ -32,6 +46,7 @@ cp ./theme/settings.ini ~/.config/gtk-4.0/
 cp -r ./theme/metro-for-steam-4.4 ~/.local/share/steam/skins
 cp ./theme/.gtkrc-2.0 ~/
 
+sudo tar -xzvf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 #/----------- cp Configs  -----------/#
 
 # Neglecting kwinrc 	 //hoping that the new compositing pipeline runs well
@@ -51,6 +66,15 @@ cp ./configs/.gitconfig ~/ #OR THIS, BUT IT'S CONVENIENT SO FUCKIT
 # ln -s /mnt/Win/Users/DanWolfstone/AppData/Roaming/.minecraft/ ~/minecraft
 # idk what else to link, so I might as well do that *one* myself
 
+#/----------- Extras  -----------/#
+cd ./gitcl
+wget https://github.com/lawl/NoiseTorch/releases/latest/download/NoiseTorch_x64.tgz						# Noisetorch/Mic noise cancellation
+		tar -C $HOME -xzf NoiseTorch_x64.tgz
+		sudo setcap 'CAP_SYS_RESOURCE=+ep' ~/.local/bin/noisetorch
+		# If you need to uninstall it check here  //        https://github.com/lawl/NoiseTorch#download--install
+
+		wget https://github.com/DavidoTek/ProtonUp-Qt/releases/download/v2.1.0/ProtonUp-Qt-2.1.0-x86_64.AppImage
+cd ..
 #/----------- Echos  -----------/#
 echo /----------- SCRIPT FINISHED  -----------/
 echo /--- if anything didnt copy then run discord/vscode/steam/OTD
