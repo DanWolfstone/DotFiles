@@ -5,16 +5,24 @@
 #/----------- Setups -----------/#
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
+sudo pacman -Syu
+
 #/----------- Installs -----------/#
 clear && echo "//> Starting installations"
 
-sudo pacman -S notepadqq yay konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger font-manager fzf neofetch rofi timeshift tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint appimagelauncher neovim dictd
+git clone https://aur.archlinux.org/yay.git # Yay is not default in !manjaro systems, so manual install required
+cd yay
+	makepkg -si
+cd .. && rm -rf ./yay
+
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi timeshift tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint  neovim dictd
 sudo pacman -S base-devel
-yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu
+yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
 sudo sh ./installs/JD2Setup_x64.sh
 pip install howdoi yt-dlp
 
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- Git Clones -----------/#
 clear && echo "//> Git and stuff"
 
@@ -30,6 +38,7 @@ git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 # I hate how fuckin long that URL is
 wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODA1ODg4MzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjY4MGM3MTE4ZTcwMGMyNDA5ZTM1Yjk4ZGYyMmUxOTc1ZGE1NDRkNTU2ZDNmNWU2ZDJlMDU3Y2MxYjljMDEzNjZjZTgzM2VlOTY3NGU0NjkwMmUwYzI2NGI3ZDBhZjM3MjVmODJjMmYyMDAwZTA3ZWI4NGJiMWQwMTJjNzRjZTQzIiwidCI6MTYzNTQwNjM5OSwic3RmcCI6ImFkNzIyNGFjNzVjM2I0M2E3NjhkM2RlNWY0M2RlZTdjIiwic3RpcCI6IjE0Ny4xNzQuNzUuMTI4In0.blNhzTG-bnW5EmBXsTJmb2UApDLLoa2jvNrllt83AP4/sugar-candy.tar.gz
 
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Themes  -----------/#
 clear && echo "//> Copying Themes"
 #Maybe Change to unzipping things
@@ -70,7 +79,7 @@ echo \n
 echo "Password required for copying SDDM theme"
 sudo tar -xzvf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
-
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Configs  -----------/#
 clear && echo "//> Copying Configs"
 
@@ -86,7 +95,7 @@ cp ./configs/homedir/* ~/
 # Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
 
-
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- Linking  -----------/#
 # ln -s /mnt/Win/Users/DanWolfstone/AppData/Roaming/.minecraft/     ~/minecraft
 # idk what else to link, so I might as well do that *one* myself
@@ -123,6 +132,7 @@ alias -s define="dict -d gcide"
 systemctl --user daemon-reload
 systemctl --user enable opentabletdriver --now
 
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- Cleanup ----------/#
 clear && echo "//> Starting Cleanup"
 
@@ -140,6 +150,7 @@ cd ./theme/ # Removing Themes
 
 cd ./
 
+echo "5s Pause for reading error messages" && sleep 5
 #/----------- Echos  -----------/#
 echo /----------- SCRIPT FINISHED  -----------/
 echo /--- if anything didnt copy then run
