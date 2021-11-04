@@ -28,32 +28,36 @@ echo "5s Pause for reading error messages" && sleep 5
 
 mkdir gitcl && cd ./gitcl
 echo "Please Sign into Git"
-git auth login
+gh auth login
 git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 	cd ./vitetris
 	sudo make install
-	cd ..
-
+	cd .. #>back to gitcl
+cd ..		#>back to dotfiles
 
 # I hate how fuckin long that URL is
-wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODA1ODg4MzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjY4MGM3MTE4ZTcwMGMyNDA5ZTM1Yjk4ZGYyMmUxOTc1ZGE1NDRkNTU2ZDNmNWU2ZDJlMDU3Y2MxYjljMDEzNjZjZTgzM2VlOTY3NGU0NjkwMmUwYzI2NGI3ZDBhZjM3MjVmODJjMmYyMDAwZTA3ZWI4NGJiMWQwMTJjNzRjZTQzIiwidCI6MTYzNTQwNjM5OSwic3RmcCI6ImFkNzIyNGFjNzVjM2I0M2E3NjhkM2RlNWY0M2RlZTdjIiwic3RpcCI6IjE0Ny4xNzQuNzUuMTI4In0.blNhzTG-bnW5EmBXsTJmb2UApDLLoa2jvNrllt83AP4/sugar-candy.tar.gz
+# wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODA1ODg4MzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjY4MGM3MTE4ZTcwMGMyNDA5ZTM1Yjk4ZGYyMmUxOTc1ZGE1NDRkNTU2ZDNmNWU2ZDJlMDU3Y2MxYjljMDEzNjZjZTgzM2VlOTY3NGU0NjkwMmUwYzI2NGI3ZDBhZjM3MjVmODJjMmYyMDAwZTA3ZWI4NGJiMWQwMTJjNzRjZTQzIiwidCI6MTYzNTQwNjM5OSwic3RmcCI6ImFkNzIyNGFjNzVjM2I0M2E3NjhkM2RlNWY0M2RlZTdjIiwic3RpcCI6IjE0Ny4xNzQuNzUuMTI4In0.blNhzTG-bnW5EmBXsTJmb2UApDLLoa2jvNrllt83AP4/sugar-candy.tar.gz
+	#cert expired? (find a better method for this)
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Themes  -----------/#
 #clear && echo "//> Copying Themes"
-#Maybe Change to unzipping things
-cd ./themes/
-tar -xzvf fonts.tar.gz
-tar -xzvf kde.tar.gz
-tar -xzvf KwinDE.tar.gz
-tar -xzvf metro-for-steam-4.4.tar.gz
-tar -xzvf Orchis-dark.tar.gz
-tar -xzvf WhiteSur-dark.tar.gz
-tar -xzvf WhiteSur-Sharp-dark.tar.gz
-tar -xzvf Win-8.1-S.tar.gz
+
+# Unzipping, do NOT use -xzvf (verbose is a mess)
+cd ./theme/
+	tar -xzf fonts.tar.gz 									&& echo "Unzipping fonts"
+	tar -xzf kde.tar.gz 										&& echo "Unzipping kde globals"
+	tar -xzf KwinDE.tar.gz 								&& echo "Unzipping KwinDE"
+	tar -xzf metro-for-steam-4.4.tar.gz		&& echo "Unzipping metro for steam"
+	tar -xzf Orchis-dark.tar.gz 						&& echo "Unzipping Orchis-Dark"
+	tar -xzf WhiteSur-dark.tar.gz 					&& echo "Unzipping WhiteSur-Dark"
+	tar -xzf WhiteSur-Sharp-dark.tar.gz 		&& echo "Unzipping WhiteSur-Sharp-Dark"
+	tar -xzf Win-8.1-S.tar.gz 							&& echo "Unzipping Win 8.1 cursor"
 cd ..
 
+# Maybe have a list of mkdirs (check #coding)
     # Moving big themes
+echo "Copying themes. . ."
 cp -r ./theme/Win-8.1-S 				~/.icons/ # Win 8.1 mouse
 
     # Plasma Theme
@@ -69,15 +73,15 @@ cp -r ./theme/fonts 					~/.local/share/ #hoping to get opensans in like this
 cp ./theme/OrchisDark.colors 			~/.local/share/color-schemes/	# Not sure if I need this
 cp ./theme/kdeglobals					~/.kde4/share/config/
 cp ./theme/kde/kdeglobals				~/.config/
-cp ./BlueOnBlack.colorscheme			~/.local/share/Konsole #Konsole Colorscheme
-cp ./Main.profile 						~/.local/share/Konsole #Konsole
+cp ./theme/BlueOnBlack.colorscheme			~/.local/share/Konsole #Konsole Colorscheme
+cp ./theme/Main.profile 						~/.local/share/Konsole #Konsole
 cp ./theme/settings.ini 				~/.config/gtk-4.0/
 cp ./theme/.gtkrc-2.0 					~/
 
 
-echo \n
+echo " "
 echo "Password required for copying SDDM theme"
-sudo tar -xzvf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
+sudo tar -xzf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Configs  -----------/#
@@ -86,13 +90,16 @@ echo "5s Pause for reading error messages" && sleep 5
 # Neglecting kwinrc 	 //hoping that the new compositing pipeline runs well
 # Neglecting spectaclerc //copy to clipboard & save location broke
 
+#Contemplating launching apps, then killing them so they generate their configs then replace
 cp ./configs/Code/settings.json ~/.config/Code/User/
 cp ./configs/discord/settings.json ~/.config/discord/
 cp ./configs/otablet/settings.json ~/.config/OpenTabletDriver/
 cp ./configs/homedir/* ~/
+
 # cp firefox config... check out > user.js instead of copying prefs.js (which has pwds/emails)
 	# maybe make the option to assume whether or not I'm on desktop or not (144hz scroll rate/etc)
-# Not copying fstab because that can be done with gnome-disks
+
+	# Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
 
 echo "5s Pause for reading error messages" && sleep 5
@@ -104,28 +111,27 @@ echo "5s Pause for reading error messages" && sleep 5
 #/----------- Extras  -----------/#
 #clear && echo "//> Exras"
 cd ./gitcl
-wget https://github.com/lawl/NoiseTorch/releases/latest/download/NoiseTorch_x64.tgz						# Noisetorch/Mic noise cancellation
-		tar -C $HOME -xzf NoiseTorch_x64.tgz
-		sudo setcap 'CAP_SYS_RESOURCE=+ep' ~/.local/bin/noisetorch
-		# If you need to uninstall it check here  //        https://github.com/lawl/NoiseTorch#download--install
+	#Change options to make wget silent
+	wget https://github.com/lawl/NoiseTorch/releases/latest/download/NoiseTorch_x64.tgz						# Noisetorch/Mic noise cancellation
+			tar -C $HOME -xzf NoiseTorch_x64.tgz
+			sudo setcap 'CAP_SYS_RESOURCE=+ep' ~/.local/bin/noisetorch
+			# If you need to uninstall it check here  //        https://github.com/lawl/NoiseTorch#download--install
 
-		wget https://github.com/DavidoTek/ProtonUp-Qt/releases/download/v2.1.0/ProtonUp-Qt-2.1.0-x86_64.AppImage
+	#Change options to make wget silent
+wget https://github.com/DavidoTek/ProtonUp-Qt/releases/download/v2.1.0/ProtonUp-Qt-2.1.0-x86_64.AppImage
 cd ..
 
 mkdir ~/pkgs/
 mkdir ~/DesX/
-mkdir ~/School/#!/bin/fish
-alias -s exa="exa -l"
-alias -s fzf="fzf -e"
-alias -s define="dict -d gcide"
+mkdir ~/School/
 
 
-#Fish aliases
-	#!/bin/fish
-	alias -s exa="exa -l"
-	alias -s fzf="fzf -e"
-	alias -s define="dict -d gcide"
-	#!/bin/bash
+#Fix fish aliases, cmd doesn't seem to want to work
+#!/bin/fish
+	# alias -s exa="exa -l"
+	# alias -s fzf="fzf -e"
+	# alias -s define="dict -d gcide"
+#!/bin/bash
 
 
 # Tablet driver
@@ -148,7 +154,7 @@ cd ./theme/ # Removing Themes
 	rm -rf ./Win-8.1-S
 	cd ..
 
-cd ./
+
 
 #echo "5s Pause for reading error messages" && sleep 5
 #/----------- Echos  -----------/#
