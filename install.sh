@@ -15,16 +15,16 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi timeshift tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint  neovim dictd
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi  tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint  neovim dictd
 sudo pacman -S base-devel
-yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager
+yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
 sudo sh ./installs/JD2Setup_x64.sh
 pip install howdoi yt-dlp
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- Git Clones -----------/#
-clear && echo "//> Git and stuff"
+#clear && echo "//> Git and stuff"
 
 mkdir gitcl && cd ./gitcl
 echo "Please Sign into Git"
@@ -40,7 +40,7 @@ wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJ
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Themes  -----------/#
-clear && echo "//> Copying Themes"
+#clear && echo "//> Copying Themes"
 #Maybe Change to unzipping things
 cd ./themes/
 tar -xzvf fonts.tar.gz
@@ -81,7 +81,7 @@ sudo tar -xzvf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- cp Configs  -----------/#
-clear && echo "//> Copying Configs"
+#clear && echo "//> Copying Configs"
 
 # Neglecting kwinrc 	 //hoping that the new compositing pipeline runs well
 # Neglecting spectaclerc //copy to clipboard & save location broke
@@ -102,7 +102,7 @@ echo "5s Pause for reading error messages" && sleep 5
 
 
 #/----------- Extras  -----------/#
-clear && echo "//> Exras"
+#clear && echo "//> Exras"
 cd ./gitcl
 wget https://github.com/lawl/NoiseTorch/releases/latest/download/NoiseTorch_x64.tgz						# Noisetorch/Mic noise cancellation
 		tar -C $HOME -xzf NoiseTorch_x64.tgz
@@ -134,7 +134,7 @@ systemctl --user enable opentabletdriver --now
 
 echo "5s Pause for reading error messages" && sleep 5
 #/----------- Cleanup ----------/#
-clear && echo "//> Starting Cleanup"
+#clear && echo "//> Starting Cleanup"
 
 #I know this isn't the most efficient but it's whatever, looks prettier to me
 cd ./theme/ # Removing Themes
@@ -150,7 +150,7 @@ cd ./theme/ # Removing Themes
 
 cd ./
 
-echo "5s Pause for reading error messages" && sleep 5
+#echo "5s Pause for reading error messages" && sleep 5
 #/----------- Echos  -----------/#
 echo /----------- SCRIPT FINISHED  -----------/
 echo /--- if anything didnt copy then run
