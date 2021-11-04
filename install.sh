@@ -2,6 +2,9 @@
 # This is my config script I'm hoping will work
 # Ver 1.2
 
+#/----------- Setups -----------/#
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
 #/----------- Installs -----------/#
 clear && echo "//> Starting installations"
 
