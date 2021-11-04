@@ -62,6 +62,9 @@ cp ./Main.profile 						~/.local/share/Konsole #Konsole
 cp ./theme/settings.ini 				~/.config/gtk-4.0/
 cp ./theme/.gtkrc-2.0 					~/
 
+
+echo \n
+echo "Password required for copying SDDM theme"
 sudo tar -xzvf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
 
