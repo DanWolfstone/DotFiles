@@ -1,0 +1,11 @@
+game:
+  args: -devserver ripple.moe
+  exe: drive_c/osu/osu!.exe
+  prefix: /home/danwolfstone/Games/osu
+system:
+  pulse_latency: true
+  reset_pulse: true
+wine:
+  Audio: auto
+  esync: true
+  version: lutris-osu-2-x86_64

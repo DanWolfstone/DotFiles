@@ -1,0 +1,10 @@
+game:
+  exe: /mnt/Rain/Program Files/Adobe/Adobe Lightroom Classic/Lightroom.exe
+  prefix: ~/.local/share/wineprefixes/.lightroom
+system:
+  disable_screen_saver: false
+wine:
+  dxvk: true
+  dxvk_version: manual
+  esync: true
+  version: lutris-6.13-3-x86_64

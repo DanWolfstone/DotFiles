@@ -15,14 +15,14 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi  tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint  neovim dictd kate ark
-sudo pacman -S base-devel
-yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip
+sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools
+yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
 sudo sh ./installs/JD2Setup_x64.sh
 pip install howdoi yt-dlp
 
-echo "5s Pause for reading error messages" && sleep 5
+echo "2s Pause for reading error messages" && sleep 2
 #/----------- Git Clones -----------/#
 #clear && echo "//> Git and stuff"
 
@@ -33,13 +33,13 @@ git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 	cd ./vitetris
 	sudo make install
 	cd .. #>back to gitcl
+
+	curl -s https://raw.githubusercontent.com/pineappleEA/Pineapple-Linux/master/pineapple.sh | sh -s
 cd ..		#>back to dotfiles
 
-# I hate how fuckin long that URL is
-# wget -P ./gitcl/  https://dl2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1ODA1ODg4MzQiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjY4MGM3MTE4ZTcwMGMyNDA5ZTM1Yjk4ZGYyMmUxOTc1ZGE1NDRkNTU2ZDNmNWU2ZDJlMDU3Y2MxYjljMDEzNjZjZTgzM2VlOTY3NGU0NjkwMmUwYzI2NGI3ZDBhZjM3MjVmODJjMmYyMDAwZTA3ZWI4NGJiMWQwMTJjNzRjZTQzIiwidCI6MTYzNTQwNjM5OSwic3RmcCI6ImFkNzIyNGFjNzVjM2I0M2E3NjhkM2RlNWY0M2RlZTdjIiwic3RpcCI6IjE0Ny4xNzQuNzUuMTI4In0.blNhzTG-bnW5EmBXsTJmb2UApDLLoa2jvNrllt83AP4/sugar-candy.tar.gz
-	#cert expired? (find a better method for this)
+sudo git clone https://framagit.org/MarianArlt/sddm-sugar-candy.git /usr/share/sddm/themes/sugar-candy
 
-echo "5s Pause for reading error messages" && sleep 5
+echo "2s Pause for reading error messages" && sleep 2
 #/----------- cp Themes  -----------/#
 #clear && echo "//> Copying Themes"
 
@@ -79,11 +79,9 @@ cp ./theme/settings.ini 				~/.config/gtk-4.0/
 cp ./theme/.gtkrc-2.0 					~/
 
 
-echo " "
-echo "Password required for copying SDDM theme"
-sudo tar -xzf ./gitcl/sugar-candy.tar.gz -C /usr/share/sddm/themes
 
-echo "5s Pause for reading error messages" && sleep 5
+
+echo "2s Pause for reading error messages" && sleep 2
 #/----------- cp Configs  -----------/#
 #clear && echo "//> Copying Configs"
 
@@ -91,10 +89,18 @@ echo "5s Pause for reading error messages" && sleep 5
 # Neglecting spectaclerc //copy to clipboard & save location broke
 
 #Contemplating launching apps, then killing them so they generate their configs then replace
+mkdir ./config/discord
+mkdir ./config/Code/User/
+mkdir ./config/OpenTabletDriver/
+
 cp ./configs/Code/settings.json ~/.config/Code/User/
 cp ./configs/discord/settings.json ~/.config/discord/
 cp ./configs/otablet/settings.json ~/.config/OpenTabletDriver/
 cp ./configs/homedir/* ~/
+cp ./configs/lightroom-1628211071.yml ~/.config/lutris/games/
+cp ./configs/osu-windows-1627438126.yml ~/.config/lutris/games/
+cp ./configs/photoshop-1628207390.yml ~/.config/lutris/games/
+cp ./configs/rclone.sh ~/config/autostart-scripts
 
 # cp firefox config... check out > user.js instead of copying prefs.js (which has pwds/emails)
 	# maybe make the option to assume whether or not I'm on desktop or not (144hz scroll rate/etc)
@@ -102,7 +108,7 @@ cp ./configs/homedir/* ~/
 	# Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
 
-echo "5s Pause for reading error messages" && sleep 5
+echo "2s Pause for reading error messages" && sleep 2
 #/----------- Linking  -----------/#
 # ln -s /mnt/Win/Users/DanWolfstone/AppData/Roaming/.minecraft/     ~/minecraft
 # idk what else to link, so I might as well do that *one* myself
@@ -131,6 +137,7 @@ mkdir ~/School/
 	# alias -s exa="exa -l"
 	# alias -s fzf="fzf -e"
 	# alias -s define="dict -d gcide"
+	# alias pineapple="curl -s https://raw.githubusercontent.com/pineappleEA/Pineapple-Linux/master/pineapple.sh | sh -s --"
 #!/bin/bash
 
 
@@ -138,7 +145,7 @@ mkdir ~/School/
 systemctl --user daemon-reload
 systemctl --user enable opentabletdriver --now
 
-echo "5s Pause for reading error messages" && sleep 5
+echo "2s Pause for reading error messages" && sleep 2
 #/----------- Cleanup ----------/#
 #clear && echo "//> Starting Cleanup"
 
@@ -161,4 +168,5 @@ cd ./theme/ # Removing Themes
 echo /----------- SCRIPT FINISHED  -----------/
 echo /--- if anything didnt copy then run
 echo /--- discord/vscode/steam/OTD
+echo /--- konsole/Lutris/wine scripts  # yet to add wine scripts
 echo /-----------      Goodbye     -----------/

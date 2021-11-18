@@ -1,0 +1,13 @@
+game:
+  arch: auto
+  exe: /mnt/Win/Program Files/Adobe/Adobe Photoshop 2020/photoshop.exe
+  prefix: ~/.local/share/wineprefixes/.photoshop
+system:
+  disable_screen_saver: false
+  vk_icd: ''
+wine:
+  dxvk: false
+  dxvk_version: manual
+  esync: true
+  overrides: {}
+  version: lutris-6.13-3-x86_64
