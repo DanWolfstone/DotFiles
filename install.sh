@@ -3,6 +3,7 @@
 # Ver 1.2
 
 #/----------- Setups -----------/#
+echo "System Updates, keyring population"
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
 sudo pacman -Syu
@@ -104,6 +105,10 @@ cp ./configs/rclone.sh ~/config/autostart-scripts
 
 # cp firefox config... check out > user.js instead of copying prefs.js (which has pwds/emails)
 	# maybe make the option to assume whether or not I'm on desktop or not (144hz scroll rate/etc)
+
+echo "Qemu Configs Copying..."
+sudo tar -xzf ./configs/qemuStuff.tar.gz /etc/libvirt/
+
 
 	# Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
