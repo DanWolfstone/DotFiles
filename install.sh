@@ -16,7 +16,7 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip lutris
 sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools
 yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
@@ -90,9 +90,11 @@ echo "2s Pause for reading error messages" && sleep 2
 # Neglecting spectaclerc //copy to clipboard & save location broke
 
 #Contemplating launching apps, then killing them so they generate their configs then replace
-mkdir ./config/discord
-mkdir ./config/Code/User/
-mkdir ./config/OpenTabletDriver/
+mkdir ~/.config/discord/
+mkdir ~/.config/Code/User/
+mkdir ~/.config/OpenTabletDriver/
+mkdir ~/.config/lutris/games/
+
 
 cp ./configs/Code/settings.json ~/.config/Code/User/
 cp ./configs/discord/settings.json ~/.config/discord/
