@@ -16,7 +16,7 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip lutris
 sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools
 yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
@@ -46,18 +46,27 @@ echo "2s Pause for reading error messages" && sleep 2
 
 # Unzipping, do NOT use -xzvf (verbose is a mess)
 cd ./theme/
-	tar -xzf fonts.tar.gz 									&& echo "Unzipping fonts"
-	tar -xzf kde.tar.gz 										&& echo "Unzipping kde globals"
-	tar -xzf KwinDE.tar.gz 								&& echo "Unzipping KwinDE"
+	tar -xzf fonts.tar.gz 					&& echo "Unzipping fonts"
+	tar -xzf kde.tar.gz 					&& echo "Unzipping kde globals"
+	tar -xzf KwinDE.tar.gz 					&& echo "Unzipping KwinDE"
 	tar -xzf metro-for-steam-4.4.tar.gz		&& echo "Unzipping metro for steam"
-	tar -xzf Orchis-dark.tar.gz 						&& echo "Unzipping Orchis-Dark"
-	tar -xzf WhiteSur-dark.tar.gz 					&& echo "Unzipping WhiteSur-Dark"
-	tar -xzf WhiteSur-Sharp-dark.tar.gz 		&& echo "Unzipping WhiteSur-Sharp-Dark"
-	tar -xzf Win-8.1-S.tar.gz 							&& echo "Unzipping Win 8.1 cursor"
+	tar -xzf Orchis-dark.tar.gz 			&& echo "Unzipping Orchis-Dark"
+	tar -xzf WhiteSur-dark.tar.gz 			&& echo "Unzipping WhiteSur-Dark"
+	tar -xzf WhiteSur-Sharp-dark.tar.gz 	&& echo "Unzipping WhiteSur-Sharp-Dark"
+	tar -xzf Win-8.1-S.tar.gz 				&& echo "Unzipping Win 8.1 cursor"
 cd ..
 
 # Maybe have a list of mkdirs (check #coding)
-    # Moving big themes
+mkdir ~/.local/share/plasma/
+	mkdir ~/.local/share/plasma/desktoptheme
+mkdir ~/.local/share/steam/
+	mkdir ~/.local/share/steam/skins/
+mkdir ~/.local/share/aurorae/
+	mkdir ~/.local/share/aurorae/themes/
+# mkdir ~/.local/share/color-schemes/ #// Doesn't seem to exist in modern dirs?
+# mkdir ~/.local/share/gtk-4.0/ #// Also doesn't seem to exist in modern dirs???
+
+# Moving big themes
 echo "Copying themes. . ."
 cp -r ./theme/Win-8.1-S 				~/.icons/ # Win 8.1 mouse
 
@@ -71,12 +80,12 @@ cp -r ./theme/Orchis-dark 				~/.themes/ # GTK 3.0 theme
 cp -r ./theme/WhiteSur-Sharp-dark       ~/.local/share/aurorae/themes/ # Close buttons
 cp -r ./theme/KwinDE                    ~/.local/share/icons/ #Icons, edit VSC icons (scalable)
 cp -r ./theme/fonts 					~/.local/share/ #hoping to get opensans in like this
-cp ./theme/OrchisDark.colors 			~/.local/share/color-schemes/	# Not sure if I need this
+# cp ./theme/OrchisDark.colors 			~/.local/share/color-schemes/	# Not sure if I need this
 cp ./theme/kdeglobals					~/.kde4/share/config/
 cp ./theme/kde/kdeglobals				~/.config/
-cp ./theme/BlueOnBlack.colorscheme			~/.local/share/Konsole #Konsole Colorscheme
-cp ./theme/Main.profile 						~/.local/share/Konsole #Konsole
-cp ./theme/settings.ini 				~/.config/gtk-4.0/
+cp ./theme/BlueOnBlack.colorscheme		~/.local/share/Konsole #Konsole Colorscheme
+cp ./theme/Main.profile 				~/.local/share/Konsole #Konsole
+# cp ./theme/settings.ini 				~/.config/gtk-4.0/
 cp ./theme/.gtkrc-2.0 					~/
 
 
@@ -90,9 +99,13 @@ echo "2s Pause for reading error messages" && sleep 2
 # Neglecting spectaclerc //copy to clipboard & save location broke
 
 #Contemplating launching apps, then killing them so they generate their configs then replace
-mkdir ./config/discord
-mkdir ./config/Code/User/
-mkdir ./config/OpenTabletDriver/
+mkdir ~/.config/discord/
+mkdir ~/.config/OpenTabletDriver/
+# Create Nest (Dirs created on launch)
+mkdir ~/.config/Code/
+	mkdir ~/.config/Code/User/
+mkdir ~/.config/lutris/
+	mkdir ~/.config/lutris/games/
 
 cp ./configs/Code/settings.json ~/.config/Code/User/
 cp ./configs/discord/settings.json ~/.config/discord/
@@ -101,7 +114,7 @@ cp ./configs/homedir/* ~/
 cp ./configs/lightroom-1628211071.yml ~/.config/lutris/games/
 cp ./configs/osu-windows-1627438126.yml ~/.config/lutris/games/
 cp ./configs/photoshop-1628207390.yml ~/.config/lutris/games/
-cp ./configs/rclone.sh ~/config/autostart-scripts
+cp ./configs/rclone.sh ~/.config/autostart-scripts
 
 # cp firefox config... check out > user.js instead of copying prefs.js (which has pwds/emails)
 	# maybe make the option to assume whether or not I'm on desktop or not (144hz scroll rate/etc)
