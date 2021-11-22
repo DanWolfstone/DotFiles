@@ -16,12 +16,15 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip lutris
-sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip pamac-manager kde-gtk-config gvim okular kdeconnect lutris
+sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools nvidia-dkms
 yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
 sudo sh ./installs/JD2Setup_x64.sh
 pip install howdoi yt-dlp
+
+echo "removing gnome bloat"
+sudo pacman -R gnome-boxes simple-scan evince epiphany cheese gnome-music totem gnome-calendar gnome-contacts gnome-system-monitor gnome-logs gnome-software gnome-books gnome-characters gnome-clocks gnome-font-viewer sushi gnome-weather gnome-maps
 
 echo "2s Pause for reading error messages" && sleep 2
 #/----------- Git Clones -----------/#
@@ -46,14 +49,14 @@ echo "2s Pause for reading error messages" && sleep 2
 
 # Unzipping, do NOT use -xzvf (verbose is a mess)
 cd ./theme/
-	tar -xzf fonts.tar.gz 					&& echo "Unzipping fonts"
-	tar -xzf kde.tar.gz 					&& echo "Unzipping kde globals"
-	tar -xzf KwinDE.tar.gz 					&& echo "Unzipping KwinDE"
+	tar -xzf fonts.tar.gz 									&& echo "Unzipping fonts"
+	tar -xzf kde.tar.gz 										&& echo "Unzipping kde globals"
+	tar -xzf KwinDE.tar.gz 								&& echo "Unzipping KwinDE"
 	tar -xzf metro-for-steam-4.4.tar.gz		&& echo "Unzipping metro for steam"
-	tar -xzf Orchis-dark.tar.gz 			&& echo "Unzipping Orchis-Dark"
-	tar -xzf WhiteSur-dark.tar.gz 			&& echo "Unzipping WhiteSur-Dark"
-	tar -xzf WhiteSur-Sharp-dark.tar.gz 	&& echo "Unzipping WhiteSur-Sharp-Dark"
-	tar -xzf Win-8.1-S.tar.gz 				&& echo "Unzipping Win 8.1 cursor"
+	tar -xzf Orchis-dark.tar.gz 						&& echo "Unzipping Orchis-Dark"
+	tar -xzf WhiteSur-dark.tar.gz 					&& echo "Unzipping WhiteSur-Dark"
+	tar -xzf WhiteSur-Sharp-dark.tar.gz 		&& echo "Unzipping WhiteSur-Sharp-Dark"
+	tar -xzf Win-8.1-S.tar.gz 							&& echo "Unzipping Win 8.1 cursor"
 cd ..
 
 # Maybe have a list of mkdirs (check #coding)
@@ -83,8 +86,8 @@ cp -r ./theme/fonts 					~/.local/share/ #hoping to get opensans in like this
 # cp ./theme/OrchisDark.colors 			~/.local/share/color-schemes/	# Not sure if I need this
 cp ./theme/kdeglobals					~/.kde4/share/config/
 cp ./theme/kde/kdeglobals				~/.config/
-cp ./theme/BlueOnBlack.colorscheme		~/.local/share/Konsole #Konsole Colorscheme
-cp ./theme/Main.profile 				~/.local/share/Konsole #Konsole
+cp ./theme/BlueOnBlack.colorscheme			~/.local/share/Konsole #Konsole Colorscheme
+cp ./theme/Main.profile 						~/.local/share/Konsole #Konsole
 # cp ./theme/settings.ini 				~/.config/gtk-4.0/
 cp ./theme/.gtkrc-2.0 					~/
 
@@ -120,8 +123,7 @@ cp ./configs/rclone.sh ~/.config/autostart-scripts
 	# maybe make the option to assume whether or not I'm on desktop or not (144hz scroll rate/etc)
 
 echo "Qemu Configs Copying..."
-sudo tar -xzf ./configs/qemuStuff.tar.gz /etc/libvirt/
-
+sudo tar -xf ./configs/qemuStuff.tar.xz  -C /etc/libvirt
 
 	# Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
