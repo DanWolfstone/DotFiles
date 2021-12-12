@@ -41,6 +41,9 @@ clear && echo "//> Git and stuff"
 mkdir gitcl && cd ./gitcl
 echo "Please Sign into Git"
 gh auth login
+git config --global user.email "DanWolfstone@gmail.com"
+git config --global user.name "DanWolfstone"
+
 git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 	cd ./vitetris
 	sudo make install
@@ -49,6 +52,10 @@ git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 git clone https://github.com/mateosss/matter.git
     cd ./matter
     sudo pacman -S inkscape imagemagick
+    # add GRUB_DISABLE_OS_PROBER=false to /etc/default/grub
+    # run os-prober then grub-updater
+    # now install matter
+
 	curl -s https://raw.githubusercontent.com/pineappleEA/Pineapple-Linux/master/pineapple.sh | sh -s
 cd ..		#>back to dotfiles
 
@@ -210,4 +217,5 @@ echo /----------- SCRIPT FINISHED  -----------/
 echo /--- if anything didnt copy then run
 echo /--- discord/vscode/steam/OTD
 echo /--- konsole/Lutris/wine scripts  # yet to add wine scripts
+echo /--- Also do grub updater stuff
 echo /-----------      Goodbye     -----------/
