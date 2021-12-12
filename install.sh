@@ -16,19 +16,27 @@ cd yay
 	makepkg -si
 cd .. && rm -rf ./yay
 
-sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip pamac-manager kde-gtk-config gvim okular kdeconnect lutris
-sudo pacman -S base-devel cmake glslang ninja python2 qt5-base qt5-tools nvidia-dkms
-yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan
+# Program installs
+sudo pacman -S notepadqq konsole fish ksysguard discord steam obs-studio vlc ghostwriter baobab gparted htop wine-staging gnome-disk-utility winetricks xarchiver spectacle firefox lutris ranger fzf neofetch rofi tldr wget rclone catfish sddm-kcm github-cli git python3 wget s-tui virt-manager kolourpaint neovim dictd kate ark python-pip kde-gtk-config gvim okular kdeconnect libreoffice-fresh
+
+
+sudo pacman -S ntfs-3g base-devel cmake libvirt edk2-ovmf glslang ninja python2 qt5-base qt5-tools nvidia-dkms gnome-keyring os-prober qt5-graphicaleffects flatpak appstream-qt archlinux-appstream-data kirigami2 knewstuff # Build Deps and Discover deps
+sudo pacman -S iptables-nft dnsmasq nftables ufw # QEMU/KVM Dependencies
+# sudo pacman -S vde2 bridge-utils ovmf
+yay -S exodus minecraft-launcher visual-studio-code-bin opentabletdriver-git scrcpy ddgr gotop pix gdu exa quickemu appimagelauncher font-manager timeshift conan jdownloader2 update-grub
 yay -S clonehero nsnake # vitetris //tetris on yay is broken rn
-sudo sh ./installs/JD2Setup_x64.sh
+# sudo sh ./installs/JD2Setup_x64.sh
 pip install howdoi yt-dlp
 
 echo "removing gnome bloat"
 sudo pacman -R gnome-boxes simple-scan evince epiphany cheese gnome-music totem gnome-calendar gnome-contacts gnome-system-monitor gnome-logs gnome-software gnome-books gnome-characters gnome-clocks gnome-font-viewer sushi gnome-weather gnome-maps
+# Wine Dependency Hell
+# sudo pacman -S giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo libxcomposite lib32-libxcomposite libxinerama lib32-libxinerama ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader cups samba dosbox
+
 
 echo "2s Pause for reading error messages" && sleep 2
 #/----------- Git Clones -----------/#
-#clear && echo "//> Git and stuff"
+clear && echo "//> Git and stuff"
 
 mkdir gitcl && cd ./gitcl
 echo "Please Sign into Git"
@@ -38,6 +46,9 @@ git clone https://github.com/vicgeralds/vitetris.git			# Tetris
 	sudo make install
 	cd .. #>back to gitcl
 
+git clone https://github.com/mateosss/matter.git
+    cd ./matter
+    sudo pacman -S inkscape imagemagick
 	curl -s https://raw.githubusercontent.com/pineappleEA/Pineapple-Linux/master/pineapple.sh | sh -s
 cd ..		#>back to dotfiles
 
@@ -45,7 +56,7 @@ sudo git clone https://framagit.org/MarianArlt/sddm-sugar-candy.git /usr/share/s
 
 echo "2s Pause for reading error messages" && sleep 2
 #/----------- cp Themes  -----------/#
-#clear && echo "//> Copying Themes"
+clear && echo "//> Copying Themes"
 
 # Unzipping, do NOT use -xzvf (verbose is a mess)
 cd ./theme/
@@ -124,6 +135,9 @@ cp ./configs/rclone.sh ~/.config/autostart-scripts
 
 echo "Qemu Configs Copying..."
 sudo tar -xf ./configs/qemuStuff.tar.xz  -C /etc/libvirt
+sudo systemctl enable libvirtd
+sudo systemctl start libvirtd
+sudo virsh net-start default
 
 	# Not copying fstab because that can be done with gnome-disks
 # sudo cp ./configs/fstab /etc/ #Be careful with this
@@ -146,10 +160,17 @@ cd ./gitcl
 	#Change options to make wget silent
 wget https://github.com/DavidoTek/ProtonUp-Qt/releases/download/v2.1.0/ProtonUp-Qt-2.1.0-x86_64.AppImage
 cd ..
+# might use?			|| 		https://github.com/keylase/nvidia-patch
 
 mkdir ~/pkgs/
 mkdir ~/DesX/
 mkdir ~/School/
+
+#Osu shit, may god help you
+# Maybe this'll work?   ||    https://aur.archlinux.org/packages/osu/
+# audio?                ||    https://wiki.archlinux.org/title/PipeWire
+# This one worked jankily|	  https://osu.ppy.sh/community/forums/topics/1248084?n=1
+# maybe worth noting	||	  https://wiki.archlinux.org/title/User:Katoumegumi
 
 
 #Fix fish aliases, cmd doesn't seem to want to work
