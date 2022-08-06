@@ -7,6 +7,7 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'romgrk/barbar.nvim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'akinsho/toggleterm.nvim' "I Don't think I did this right, check toggleterm/lua/config.lua  
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
 Plug 'glepnir/dashboard-nvim'
@@ -16,6 +17,7 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'nvim-lua/popup.nvim'
 " Plug 'mangeshrex/uwu.vim' " Comments were too dark so I manually recolored
+" maybe check this out https://github.com/folke/which-key.nvim
 Plug 'srcery-colors/srcery-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
@@ -55,8 +57,9 @@ set mouse+=a
  "
  " let g_airline_theme='wombat'
  " colorscheme PaperColor
- " colorscheme srcery " Doesn't wanna look like https://vimcolorschemes.com/srcery-colors/srcery-vim 
-  colorscheme uwu
+	set termguicolors
+	colorscheme srcery " Doesn't wanna look like https://vimcolorschemes.com/srcery-colors/srcery-vim 
+  " colorscheme uwu
 let g:airline_theme='tomorrow'
 
 " Dashboard
@@ -96,7 +99,7 @@ require('telescope').setup{
 	}
 
 -- This is where toggleterm's setup would go
-
+require("toggleterm").setup{}
 EOF
 
 

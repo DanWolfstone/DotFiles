@@ -1,0 +1,108 @@
+Arch: win64
+Creation_Date: '2022-05-27 12:31:11.671246'
+Custom_Path: false
+DLL_Overrides: {}
+DXVK: dxvk-1.10.1
+Environment: Application
+Environment_Variables: {}
+External_Programs:
+    photoshop.exe:
+        executable: photoshop.exe
+        name: photoshop
+        path: /home/danwolfstone/Applications/Adobe Photoshop 2020/photoshop.exe
+Installed_Dependencies:
+- arial32
+- times32
+- courie32
+- atmlib
+- gdiplus
+- mono
+- vcredist2008
+- vcredist2010
+- vcredist2012
+- vcredist2013
+- vcredist2019
+- msxml3
+- msxml6
+- andale32
+- arialb32
+- comic32
+- georgi32
+- impact32
+- tahoma32
+- trebuc32
+- verdan32
+- webdin32
+- allfonts
+- gecko
+LatencyFleX: latencyflex-v0.1.0
+Latest_Executables: []
+NVAPI: dxvk-nvapi-v0.5.4
+Name: Adobe
+Parameters:
+    custom_dpi: 96
+    discrete_gpu: true
+    dxvk: true
+    dxvk_hud: false
+    dxvk_nvapi: false
+    fixme_logs: false
+    fsr: false
+    fsr_level: 5
+    fullscreen_capture: false
+    gamemode: false
+    gamescope: false
+    gamescope_borderless: false
+    gamescope_fps: 0
+    gamescope_fps_no_focus: 0
+    gamescope_fullscreen: true
+    gamescope_game_height: 0
+    gamescope_game_width: 0
+    gamescope_scaling: false
+    gamescope_window_height: 0
+    gamescope_window_width: 0
+    latencyflex: false
+    mangohud: false
+    obsvkc: false
+    pulseaudio_latency: false
+    renderer: gl
+    sync: wine
+    take_focus: false
+    use_runtime: false
+    use_steam_runtime: false
+    virtual_desktop: false
+    virtual_desktop_res: 1280x720
+    vkbasalt: false
+    vkd3d: true
+Path: Photoshop-Test
+Runner: caffe-7.7
+State: 0
+Uninstallers:
+    allfonts: true
+    andale32: false
+    arial32: false
+    arialb32: false
+    atmlib: false
+    comic32: false
+    courie32: false
+    gdiplus: false
+    gecko: true
+    georgi32: false
+    impact32: false
+    mono: true
+    msxml3: true
+    msxml6: false
+    tahoma32: false
+    times32: false
+    trebuc32: false
+    vcredist2008: true
+    vcredist2010: true
+    vcredist2012: true
+    vcredist2013: true
+    vcredist2019: true
+    verdan32: false
+    webdin32: false
+Update_Date: '2022-05-27 12:39:43.500002'
+VKD3D: vkd3d-proton-2.6
+Versioning: false
+Windows: win10
+WorkingDir: ''
