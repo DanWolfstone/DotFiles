@@ -1,31 +1,47 @@
-" Installing Dependencies
+
 call plug#begin()
 
-Plug 'https://github.com/preservim/nerdtree' " NerdTree
-Plug 'https://github.com/ryanoasis/vim-devicons' " Dev Icons for nerdtree
+Plug 'https://github.com/preservim/nerdtree'		" NerdTree
+Plug 'https://github.com/ryanoasis/vim-devicons'	" Dev Icons for nerdtree
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'romgrk/barbar.nvim'
-Plug 'vim-airline/vim-airline'
+Plug 'romgrk/barbar.nvim'							" File tabs up top
+Plug 'vim-airline/vim-airline'						" Bar down there (updated recently)
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'akinsho/toggleterm.nvim' "I Don't think I did this right, check toggleterm/lua/config.lua  
+Plug 'akinsho/toggleterm.nvim'						" I Don't think I did this right, check toggleterm/lua/config.lua  
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-Plug 'glepnir/dashboard-nvim'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'								" Search Engine
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'nvim-lua/popup.nvim'
-" Plug 'mangeshrex/uwu.vim' " Comments were too dark so I manually recolored
-" maybe check this out https://github.com/folke/which-key.nvim
+Plug 'darfink/vim-plist'
+Plug 'tpope/vim-commentary'							" use 'gcc' to comment lines
+Plug 'ray-x/lsp_signature.nvim'						" Helpful for docs
+" Autocomplete
+	Plug 'neovim/nvim-lspconfig'
+	Plug 'hrsh7th/cmp-nvim-lsp'
+	Plug 'hrsh7th/nvim-cmp'
+	Plug 'hrsh7th/cmp-buffer'
+	Plug 'hrsh7th/cmp-path'
+	Plug 'hrsh7th/cmp-cmdline'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Colors
+" Plug 'mangeshrex/uwu.vim'							" Comments were too dark so I manually recolored
 Plug 'srcery-colors/srcery-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
+" Langs
+Plug 'rust-lang/rust.vim'
+" maybe check this out https://github.com/folke/which-key.nvim
 
-call plug#end()
+call plug#end() 
+
 
 " Settings
 
+autocmd FileType apache setlocal commentstring=#\ %s
+filetype plugin indent on
 set encoding=UTF-8
 set number " Numbered lines
 syntax on " turn on syntax, duh
@@ -39,7 +55,6 @@ set hlsearch " highlight search result
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
-filetype plugin indent on
 set wildmode=longest,list " I think this is for autocorrect stuff
 " set cc=80
 set nostartofline
@@ -48,7 +63,7 @@ set cursorline
 " set nocompatible " disable compat with old vi? idk what it means tho
 " set guifont=DroidSansMono\ Nerd\ Font\ 11
 set mouse+=a
-
+set clipboard+=unnamedplus
 
 " Theme
  set background=dark
@@ -57,49 +72,32 @@ set mouse+=a
  "
  " let g_airline_theme='wombat'
  " colorscheme PaperColor
-	set termguicolors
-	colorscheme srcery " Doesn't wanna look like https://vimcolorschemes.com/srcery-colors/srcery-vim 
+set termguicolors " this variable must be enabled for colors to be applied properly
+colorscheme srcery " Doesn't wanna look like https://vimcolorschemes.com/srcery-colors/srcery-vim 
   " colorscheme uwu
 let g:airline_theme='tomorrow'
 
-" Dashboard
-let g:dashboard_default_executive = 'fzf' 
-let g:dashboard_custom_header = [
-\ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
-\ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
-\ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
-\ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
-\ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
-\ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
-\]
-let g:dashboard_custom_section = {
-\  'buffer_list': {
-\        'description': ['text'], 'command': 'e',
-\    }
-\}
-set termguicolors " this variable must be enabled for colors to be applied properly
 lua <<EOF
-vim.g.dashboard_custom_section = {
-    a = {description = {'  New file                  '}, command = 'DashboardNewFile'},
-    b = {description = {'  Browse files              '}, command = 'Telescope file_browser'},
-	c = {description = {'  Recently Opened           '}, command = 'History'},
-	d = {description = {'  Change Colorscheme        '}, command = 'Colors'},
-	e = {description = {'  Settings                  '}, command = 'edit /home/danwolfstone/.config/nvim/init.vim'},
-    f = {description = {'  Exit                      '}, command = 'exit'},
+cfg = {	}  -- add you config here
+  	require("toggleterm").setup{}
+	require('lspconfig').pyright.setup{}
+	require('lsp_signature').setup(cfg) 
+	
+require'cmp'.setup {
+  sources = {
+    { name = 'nvim_lsp' }
+  }
 }
 
-require('telescope').setup{
-	defaults = {
-		layout_strategy = 'horizontal',
-		layout_config = { 
-			height=0.95, 
-			-- prompt_position = 'top', 
-			},
-		},
-	}
+-- The nvim-cmp almost supports LSP's capabilities so You should advertise it to LSP servers..
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- This is where toggleterm's setup would go
-require("toggleterm").setup{}
+-- The following example advertise capabilities to `clangd`.
+require'lspconfig'.clangd.setup {
+  capabilities = capabilities,
+}
+
 EOF
 
 
@@ -114,9 +112,42 @@ let g:WebDevIconsNerdTreeGitPluginForceVAlign=0
 
 " Folding
 set foldmethod=syntax
-set nofoldenable
 
+"COC Langs
+let g:coc_global_extensions = [
+  \ 'coc-tsserver',
+  \ 'coc-json',
+  \ 'coc-css',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ ]
+" Complete via pressing tab
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else 
+    call feedkeys('K', 'in')
+  endif
+endfunction
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
@@ -145,21 +176,21 @@ inoremap <C-S-down> <Esc>:m .+1<CR>==gi
 vnoremap <C-S-down> :m '>+1<CR>gv=gv
 
 " ---- Save
-nnoremap <silent> <C-s> :w<CR>
-inoremap <silent> <C-s> <Esc>:w<CR><right>i
-vnoremap <silent> :w<CR>
+nnoremap ß :w<CR>
+inoremap ß <Esc>:w<CR><right>i
+vnoremap ß :w<CR>
 " ---- Quit
-nnoremap <C-q> :q<CR>
-inoremap <C-q> <Esc>:q<CR>i
-vnoremap <C-q> :q<CR>
+nnoremap œ :q<CR>
+inoremap œ <Esc>:q<CR>i
+vnoremap œ :q<CR>
 " Force Quit // Don't use, quits the whole program
 nnoremap <C-S-q> :qa!<CR>
 inoremap <C-S-q> <Esc>:qa!<CR>
 vnoremap <C-S-q> :qa!<CR>
 " ---- Undo
-nnoremap <C-z> u
-inoremap <C-z> <Esc>u<CR><up>i
-vnoremap <C-z> u
+nnoremap Ω u
+inoremap Ω <Esc>u<CR><up>i
+vnoremap Ω u
 " ---- Terminal
 tnoremap <Esc> <C-\><C-n>
 nnoremap <F4> :ToggleTerm<CR>
@@ -167,4 +198,5 @@ vnoremap <F4> :ToggleTerm<CR>
 inoremap <F4> :ToggleTerm<CR>
 tnoremap <F4> <C-\><C-n>:ToggleTerm<CR>
 " }}}
+
 
