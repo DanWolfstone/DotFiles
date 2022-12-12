@@ -214,18 +214,7 @@ endfunction
 
 " Dashboard
 
-" let g:dashboard_custom_footer = ['LuaJIT loaded '..packages..' packages']
-
-
-lua <<EOF
-local dashboard = require("dashboard")
-local version = vim.version()
-
---local function repeat_str (str, times)
---return times > 0 and str..repeat_str(str, times-1) or ""
---end
-
-dashboard.custom_header = {
+let g:dashboard_custom_header = [
 \ '                                                       ',
 \ '                                                       ',
 \ '                                                       ',
@@ -238,30 +227,27 @@ dashboard.custom_header = {
 \ '                                                       ',
 \ '                                                       ',
 \ '                                                       ',
-\}
+\]
 
-dashboard.custom_center = {
-	{ desc = "   New file            ", 			action = "DashboardNewFile", },
-	{ desc = "   Browse files        ", 			action = "Telescope file_browser", },
-    { desc = "   Recent              ", 			action = "Telescope oldfiles", },
-	{ desc = "   Update plugins      ", 			action = "PlugUpdate",},
-	{ desc = "   Open Terminal       ", 			action = "ToggleTerm", },
-    { desc = "   Settings            ", 			action = "edit $MYVIMRC" },
-    { desc = "   Close neovim        ", 			action = "qa!" },
-	--  action = "Telescope find_files cwd=~/.config/nvim/ search_dirs=Ultisnips,lua,viml,init.vim",
+let total_plugins = len(keys(g:plugs))
+let g:dashboard_custom_footer = [' Loaded '..total_plugins.. ' packages', 
+\ "  Neovim version: " .. version .. '']
+
+" Dashboard Menu 
+lua <<EOF
+vim.g.dashboard_custom_section = {
+    a = {description = {'   New file            '}, command = 'DashboardNewFile'},
+    b = {description = {'   Browse files        '}, command = 'Telescope file_browser'},
+	c = {description = {'   Recent              '}, command = 'Telescope oldfiles'},
+	d = {description = {'   Update plugins      '}, command = 'PlugUpdate'},
+	e = {description = {'   Settings            '}, command = 'edit $MYVIMRC'},
+    f = {description = {'   Close neovim        '}, command = 'qa!'},
+	--   
 }
-
-local footer = function()
-  local version = " " .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
---  local total_plugins = "   " .. packages .. " Plugins"
---  return version .. total_plugins
-end
-
-dashboard.custom_footer = footer()
-
-
-
 EOF
+
+
+
 
 
 
@@ -299,9 +285,54 @@ inoremap <F4> <Esc>:ToggleTerm<CR>
 tnoremap <F4> <C-\><C-n>:ToggleTerm<CR>
 
 " ---- Tab Management
-nnoremap <M-TAB> gt
-inoremap <M-TAB> gt
-vnoremap <M-Tab> gt
+nnoremap <C-Tab> gt
+inoremap <C-Tab> gt
+vnoremap <C-Tab> gt
+
+" ---- Save
+nnoremap <silent> <C-s> :w<CR>
+inoremap <silent> <C-s> <Esc>:w<CR><right>i
+vnoremap <silent> :w<CR>
+
+" ---- Quit
+nnoremap <C-q> :q<CR>
+inoremap <C-q> <Esc>:q<CR>i
+vnoremap <C-q> :q<CR>
+
+" Force Quit // Don't use, quits the whole program
+nnoremap <C-S-q> :qa!<CR>
+inoremap <C-S-q> <Esc>:qa!<CR>
+vnoremap <C-S-q> :qa!<CR>
+
+" ---- Undo
+nnoremap <C-z> u
+inoremap <C-z> <Esc>u<CR><up>i
+vnoremap <C-z> u
+
+" ---- Terminal
+tnoremap <Esc> <C-\><C-n>
+nnoremap <F4> :ToggleTerm<CR>
+vnoremap <F4> :ToggleTerm<CR>
+inoremap <F4> :ToggleTerm<CR>
+tnoremap <F4> <C-\><C-n>:ToggleTerm<CR>
+
+" ---- Refresh File
+nnoremap <F5> :so %<CR>
+inoremap <F5> :so %<CR>
+vnoremap <F5> :so %<CR>
+
+" ---- Open File
+nnoremap <C-o> :Telescope file_browser<CR>
+inoremap <C-o> :Telescope file_browser<CR>
+vnoremap <C-o> :Telescope file_browser<CR>
+
+" ---- Open File from current directory
+nnoremap <C-S-o> :Telescope file_browser path=%:p:h<CR>
+inoremap <C-S-o> :Telescope file_browser path=%:p:h<CR>
+vnoremap <C-S-o> :Telescope file_browser path=%:p:h<CR>
+
+
+
 
 " }}}
 
@@ -341,9 +372,5 @@ nnoremap Ø :Telescope file_browser path=%:p:h<CR>
 inoremap Ø :Telescope file_browser path=%:p:h<CR>
 vnoremap Ø :Telescope file_browser path=%:p:h<CR>
 
-" ---- Refresh File
-nnoremap <F5> :so %<CR>
-inoremap <F5> :so %<CR>
-vnoremap <F5> :so %<CR>
 
 " }}}
