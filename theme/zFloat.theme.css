@@ -69,7 +69,7 @@
 }
 
 /* No Friends List */
-@media (max-width:700px) {
+@media (max-width: 900px) {
     :root {
         --guildicon-size: 40;
         --float-members-width: 0;
@@ -77,15 +77,16 @@
 }
 
 /* small group icons */
-@media (max-width:500px) {
+@media (min-width:700px) {
     :root {
         --float-sidebar-width: 0;
     }
 }
 
 /* Pure Chat */
-@media (max-width:400px) {
+@media (max-width:700px) {
     :root {
         --guildlist-collapse: 1;
     }
 }
+
